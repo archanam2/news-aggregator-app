@@ -1,14 +1,15 @@
-const url ='http://newsapi.org/v2/everything?q=bitcoin&from=2020-04-05&sortBy=publishedAt&apiKey=34f8d57afa9446d38264a27637d25b4f';
+const url ='http://newsapi.org/v2/everything?q=bitcoin&from=2020-04-07&sortBy=publishedAt&apiKey=4e5acce35bab4b4d9c29883a8ba9ded3';
 
 
 
 $(document).ready(async function news(){
-         await fetch(url);
-        .then((res) => res.json())
-        .then((articles) => {
-            let output="";
-            news.articles.forEach(article=>{
-                output += `
+	let response = await fetch(url);
+	let data = await response.json();
+	//debugger;
+	let news = ''
+	data.articles.forEach(article=> {
+		// put your loop code over here 
+				news+= `
                     <li class="article">
                        <img class="article-img" src="${article.urlToImage}"/>
 
@@ -21,18 +22,27 @@ $(document).ready(async function news(){
                        <a class="article-link" href="${article.url}" target="_blank"></a>
                     </li>
                 `;
+			});//iteration
+         /* let response = await fetch(url);
+		  let data = await response.json();
+        //x.then(res => res.json())
+		data.forEach((x) => {});
+        .then((articles) => {
+            let output="";
+            news.articles.forEach(article=>{
+                
 					   console.log("hii ".output);
-            });
+            });*/
 			
-            document.getElementById("news-articles").innerHTML=output;
+            document.getElementById("news-articles").innerHTML=news;
         })
        
-    });
+    
 
 $(document).ready(function(){ 
     $('#search').keypress(()=>{
       let searchField = $("#search").val();
-      const url1 = `https://newsapi.org/v2/everything?q=${searchField}&apiKey=34f8d57afa9446d38264a27637d25b4f`;
+      const url1 = `https://newsapi.org/v2/everything?q=${searchField}&apiKey=4e5acce35bab4b4d9c29883a8ba9ded3`;
       
       if(searchField !== ""){
         $.ajax({
